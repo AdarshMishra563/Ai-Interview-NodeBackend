@@ -97,7 +97,7 @@ app.get("/",(req,res)=>{
         <script>
           const token = prompt("Enter your JWT token here"); // Simple prompt for now
 console.log(token,"tttttt")
-          const socket = io("http://localhost:8000", {
+          const socket = io("https://ai-interview-nodebackend.onrender.com", {
             auth: {
               token: token
             }
