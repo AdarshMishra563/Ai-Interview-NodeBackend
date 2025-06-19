@@ -124,7 +124,7 @@ console.log(token,"tttttt")
             document.getElementById("messageInput").value = "";
           }
 
-          // Listen for any receive events if you want
+          
           socket.on("receive_message", (data) => {
             document.getElementById("log").innerText += "\\nReceived: " + data.message;
           });
