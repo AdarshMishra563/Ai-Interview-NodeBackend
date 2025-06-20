@@ -40,7 +40,7 @@ const handleMessage = async (io,socket, data) => {
     });
   }
 
-  conversation.messages.push({ role: "user", content: message +" (do not include note in assistant reply)"})
+  conversation.messages.push({ role: "user", content: message +" (do not include note in assistant reply and ask only one question at a time)"})
 
 
   const maxMessages = 15;
