@@ -17,7 +17,7 @@ db();
 app.use(cors());
 app.use(express.json());
 const Conversation=require('./model/Conversation')
-const PORT=8000;
+const PORT= process.env.PORT || 8000;
 
 io.on("connection",async (socket) => {
   console.log("New client connected:", socket.id);
