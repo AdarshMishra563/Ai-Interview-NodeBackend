@@ -20,7 +20,7 @@ const Conversation=require('./model/Conversation')
 const PORT= process.env.PORT || 8000;
 
 io.on("connection",async (socket) => {
-  console.log("New client connected:", socket.id);
+  console.log("New client connected now:", socket.id);
   
   const token = socket.handshake.auth.token;
 
