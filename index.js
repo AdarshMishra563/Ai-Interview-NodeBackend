@@ -10,6 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: { origin: "*" },
+  transports: ["websocket"]
 });
 const db = require("./model/db");
 const { startInterview } = require("./controllers/StartInterview");
@@ -18,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 const Conversation=require('./model/Conversation')
 const PORT= process.env.PORT || 8000;
-
+const connectedUsers = new Map();
 io.on("connection",async (socket) => {
   console.log("New client connected now:", socket.id);
   
@@ -32,6 +33,14 @@ io.on("connection",async (socket) => {
       try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.user.id;
+   if (connectedUsers.has(userId)) {
+      const oldSocketId = connectedUsers.get(userId);
+      io.sockets.sockets.get(oldSocketId)?.disconnect();
+    }
+
+    connectedUsers.set(userId, socket.id);
+
+        
   socket.join(userId);
     console.log(`Socket ${socket.id} joined room ${userId}`);
 
